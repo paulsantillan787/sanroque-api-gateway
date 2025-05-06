@@ -9,6 +9,9 @@ interface EnvVars {
 
   EVALUATION_SERVICE_HOST: string;
   EVALUATION_SERVICE_PORT: number;
+
+  DIAGNOSIS_SERVICE_HOST: string;
+  DIAGNOSIS_SERVICE_PORT: number;
 }
 
 const envsSchema = joi.object({
@@ -19,6 +22,9 @@ const envsSchema = joi.object({
 
   EVALUATION_SERVICE_HOST: joi.string(),
   EVALUATION_SERVICE_PORT: joi.number(),
+
+  DIAGNOSIS_SERVICE_HOST: joi.string(),
+  DIAGNOSIS_SERVICE_PORT: joi.number(),
 })
 .unknown(true);
 
@@ -36,4 +42,7 @@ export const envs = {
 
   evaluationServiceHost: envVars.EVALUATION_SERVICE_HOST,
   evaluationServicePort: envVars.EVALUATION_SERVICE_PORT,
+
+  diagnosisServiceHost: envVars.DIAGNOSIS_SERVICE_HOST,
+  diagnosisServicePort: envVars.DIAGNOSIS_SERVICE_PORT,
 }
