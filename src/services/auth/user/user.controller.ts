@@ -1,15 +1,15 @@
 import { Controller, Get, Post, Body, UseGuards, Inject, Patch } from '@nestjs/common';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from '../guards/auth.guard';
 import { AUTH_SERVICE } from 'src/config';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { catchError } from 'rxjs';
-import { Token } from './decorator/token.decorator';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Token } from '../decorator/token.decorator';
+import { UpdateUserDto } from '../user/dto/update-user.dto';
 
-@Controller('auth')
-export class AuthController {
+@Controller('user')
+export class UserController {
   constructor(@Inject(AUTH_SERVICE) private readonly authClient: ClientProxy) {}
 
   @Post('register')

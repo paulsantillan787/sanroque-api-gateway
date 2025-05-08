@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param, Inject, UseGuards, ParseIntPipe } f
 import { CreateTestPerformedDto } from './dto/create-test-performed.dto';
 import { AUTH_SERVICE, EVALUATION_SERVICE } from 'src/config';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
-import { AuthGuard } from 'src/services/auth/auth.guard';
+import { AuthGuard } from 'src/services/auth/guards/auth.guard';
 import { Token } from 'src/services/auth/decorator/token.decorator';
 import { catchError, firstValueFrom } from 'rxjs';
 
