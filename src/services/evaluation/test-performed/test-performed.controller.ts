@@ -40,6 +40,7 @@ export class TestPerformedController {
     return this.evaluationClient.send({ cmd: 'evaluation.all.test' }, userId);
   }
 
+  @UseGuards(AuthGuard)
   @Get('evaluate/:id')
   findOne(@Param('id') id: string) {
     return this.evaluationClient.send({ cmd: 'evaluation.one.test' }, id);

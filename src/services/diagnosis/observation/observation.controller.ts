@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Inject, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Inject, Param, UseGuards } from '@nestjs/common';
 import { CreateObservationDto } from './dto/create-observation.dto';
 import { DIAGNOSIS_SERVICE } from 'src/config';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { catchError } from 'rxjs';
 
 @Controller('diagnosis')
-export class DiagnosisController {
+export class ObservationController {
   constructor(@Inject(DIAGNOSIS_SERVICE) private readonly diagnosisClient: ClientProxy) {}
 
   @Post(':test_performed_id')
