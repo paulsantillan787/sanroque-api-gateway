@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { GeminiController } from './gemini.controller';
-import { DIAGNOSIS_SERVICE, envs } from 'src/config';
+import { AUTH_SERVICE, DIAGNOSIS_SERVICE, envs } from 'src/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
@@ -14,6 +14,14 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         options: {
           host: envs.diagnosisServiceHost,
           port: envs.diagnosisServicePort
+        }
+      },
+      {
+        name: AUTH_SERVICE,
+        transport: Transport.TCP,
+        options: {
+          host: envs.authServiceHost,
+          port: envs.authServicePort
         }
       }
     ])
