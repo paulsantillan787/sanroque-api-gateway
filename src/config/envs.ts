@@ -12,6 +12,8 @@ interface EnvVars {
 
   DIAGNOSIS_SERVICE_HOST: string;
   DIAGNOSIS_SERVICE_PORT: number;
+
+  CORS_ORIGIN: string;
 }
 
 const envsSchema = joi.object({
@@ -25,6 +27,8 @@ const envsSchema = joi.object({
 
   DIAGNOSIS_SERVICE_HOST: joi.string(),
   DIAGNOSIS_SERVICE_PORT: joi.number(),
+
+  CORS_ORIGIN: joi.string()
 })
 .unknown(true);
 
@@ -45,4 +49,5 @@ export const envs = {
 
   diagnosisServiceHost: envVars.DIAGNOSIS_SERVICE_HOST,
   diagnosisServicePort: envVars.DIAGNOSIS_SERVICE_PORT,
+  corsOrigin: envVars.CORS_ORIGIN,
 }

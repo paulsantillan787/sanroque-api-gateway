@@ -16,6 +16,9 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     })
   );
+  app.enableCors({
+    origin: envs.corsOrigin,
+  })
   
   await app.listen( envs.port );
   logger.log(`API Gateway running on port ${envs.port}`);
