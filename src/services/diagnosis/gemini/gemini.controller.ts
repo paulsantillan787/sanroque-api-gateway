@@ -4,6 +4,7 @@ import { catchError } from 'rxjs';
 import { DIAGNOSIS_SERVICE } from 'src/config';
 import { CreateGeminiDto } from './dto/create-gemini.dto';
 import { TeacherGuard } from '../../auth/guards/teacher.guard';
+import { CreateValidationDto } from './dto/create-validation.dto';
 
 @Controller('gemini')
 export class GeminiController {
@@ -13,6 +14,15 @@ export class GeminiController {
   @Post('generate')
   generate(@Body() createGeminiDto: CreateGeminiDto) {
     return this.diagnosisClient.send({ cmd: 'diagnosis.generate.gemini' }, createGeminiDto)
+      .pipe(
+        catchError((error) => { throw new RpcException(error) })
+      );
+  }
+
+  @UseGuards(TeacherGuard)
+  @Post('validate')
+  validate(@Body() createValidationDto: CreateValidationDto) {
+    return this.diagnosisClient.send({ cmd: 'diagnosis.generate.gemini.validation' }, createValidationDto)
       .pipe(
         catchError((error) => { throw new RpcException(error) })
       );

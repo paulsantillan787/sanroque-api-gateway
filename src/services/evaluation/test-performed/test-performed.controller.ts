@@ -42,7 +42,24 @@ export class TestPerformedController {
 
   @UseGuards(AuthGuard)
   @Get('evaluate/:id')
-  findOne(@Param('id') id: string) {
-    return this.evaluationClient.send({ cmd: 'evaluation.one.test' }, id);
+  async findOne(@Param('id') id: string) {
+    //return this.evaluationClient.send({ cmd: 'evaluation.one.test' }, id);
+    const testPerformed = await firstValueFrom(
+      this.evaluationClient.send({ cmd: 'evaluation.one.test' }, id)
+    )
+
+    const studentData = await firstValueFrom(
+      this.authClient.send({ cmd: 'auth.one.student' }, testPerformed.userId)
+    )
+
+    return {
+      ...testPerformed,
+      user: {
+        firstname: studentData.user.firstname,
+        lastname: studentData.user.lastname,
+        age: studentData.user.age,
+        gender: studentData.user.gender
+      },
+    }
   }
 }
