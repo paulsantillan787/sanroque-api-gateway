@@ -7,6 +7,9 @@ export class CreateGeminiDto {
 
   @IsString()
   templateTestName: string;
+  
+  @IsString()
+  templateTestDescription: string;
 
   @IsString()
   studentName: string;
