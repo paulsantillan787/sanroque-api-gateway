@@ -12,6 +12,7 @@ interface EnvVars {
 
   DIAGNOSIS_SERVICE_HOST: string;
   DIAGNOSIS_SERVICE_PORT: number;
+  DIAGNOSIS_SERVICE_URL: string;
 
   CORS_ORIGIN: string;
 }
@@ -27,12 +28,13 @@ const envsSchema = joi.object({
 
   DIAGNOSIS_SERVICE_HOST: joi.string(),
   DIAGNOSIS_SERVICE_PORT: joi.number(),
+  DIAGNOSIS_SERVICE_URL: joi.string().uri().required(),
 
   CORS_ORIGIN: joi.string()
 })
 .unknown(true);
 
-const { error, value } = envsSchema.validate( process.env );
+const { error, value } = envsSchema.validate(process.env);
 
 if (error) throw new Error(`Config validation error: ${error.message}`);
 
@@ -49,5 +51,7 @@ export const envs = {
 
   diagnosisServiceHost: envVars.DIAGNOSIS_SERVICE_HOST,
   diagnosisServicePort: envVars.DIAGNOSIS_SERVICE_PORT,
+  diagnosisServiceUrl: envVars.DIAGNOSIS_SERVICE_URL,
+
   corsOrigin: envVars.CORS_ORIGIN,
 }
